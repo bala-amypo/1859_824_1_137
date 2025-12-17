@@ -30,5 +30,11 @@ public getfullName(){
     return fullName;
 }
 public setfullName(string fullName){
-    this.fullName
+    this.fullName=fullName;
+}
+public get(){
+    return fullName;
+}
+public setfullName(string fullName){
+    this.fullName=fullName;
 }
