@@ -32,9 +32,22 @@ public getfullName(){
 public setfullName(string fullName){
     this.fullName=fullName;
 }
-public get(){
-    return fullName;
+public getactive(){
+    return active;
 }
-public setfullName(string fullName){
-    this.fullName=fullName;
+public setactive(Boolean active){
+    this.active=active;
 }
+public getcreatedAt(){
+    return createdAt;
+}
+public setcreatedAt(Timestamp createdAt){
+    this.createdAt=createdAt;
+}
+public getupdatedAt(){
+    return updatedAt ;
+}
+public setupdatedAt(Timestamp updatedAt){
+    this.updatedAt=updatedAt;
+}
+
