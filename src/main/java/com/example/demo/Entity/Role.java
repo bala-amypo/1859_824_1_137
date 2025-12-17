@@ -27,11 +27,11 @@ public void setroleName(string roleName)
 }
 public string getdescription()
 {
-    return id;
+    return description;
 }
-public void setdescription(string )
+public void setdescription(string description )
 {
-    this.id=id;
+    this.description=description;
 }
 
 
