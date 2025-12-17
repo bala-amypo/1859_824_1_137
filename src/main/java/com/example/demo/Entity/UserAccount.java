@@ -55,4 +55,14 @@ public Timestamp getupdatedAt(){
 public void setupdatedAt(Timestamp updatedAt){
     this.updatedAt=updatedAt;
 }
+public UserAccount()
+{}
+public UserAccount(Long id,String email,String fullName,Boolean active,Timestamp createdAt,Timestamp updatedAt){
+    this.id=id;
+    this.email=email;
+    this.fullName=fullName;
+    this.active=active;
+    this.createdAt=createdAt
+
+}
 }
