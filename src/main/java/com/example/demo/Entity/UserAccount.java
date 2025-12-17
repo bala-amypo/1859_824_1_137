@@ -2,6 +2,7 @@ import.jakarta.persistence.Entity;
 import.jakarta.persistence.Id;
 import.jakarta.persistence.Column;
 
+
 @Entity
 public class UserAccount{
     @Id
@@ -10,10 +11,11 @@ public class UserAccount{
     private String email;
     private String fullname;
     private Boolean active;
+    @PrePersist
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
-}
+
 public Long getid()
 {
     return id;
@@ -52,4 +54,4 @@ public Timestamp getupdatedAt(){
 public void setupdatedAt(Timestamp updatedAt){
     this.updatedAt=updatedAt;
 }
-
+}
