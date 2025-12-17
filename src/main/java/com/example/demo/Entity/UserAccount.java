@@ -1,7 +1,7 @@
-import.jakarta.persistence.Entity;
-import.jakarta.persistence.Id;
-import.jakarta.persistence.Column;
-import.jakarta.persistence.PrePersist;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.persistence.PrePersist;
 @Entity
 public class UserAccount{
     @Id
