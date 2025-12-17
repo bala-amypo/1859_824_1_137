@@ -33,6 +33,15 @@ public void setdescription(string description )
 {
     this.description=description;
 }
+public string getactive()
+{
+    return active;
+}
+public void setactive(Boolean active)
+{
+    this.active=active;
+}
+
 
 
 }
