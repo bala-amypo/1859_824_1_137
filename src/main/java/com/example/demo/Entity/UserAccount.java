@@ -20,3 +20,7 @@ public setid(Long id)
 {
     this.id=id;
 }
+public getemail(){
+    return email;
+}
+public
