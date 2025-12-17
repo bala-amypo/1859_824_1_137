@@ -1,11 +1,13 @@
 import.jakarta.persistence.Entity;
 import.jakarta.persistence.Id;
+import.jakarta.persistence.Column;
+
 @Entity
 public class UserAccount{
     @Id
     private Long id;
     @Column (unique=ture)
-    private String emil;
+    private String email;
     private String fullname;
     private Boolean active;
     private Timestamp createdAt;
