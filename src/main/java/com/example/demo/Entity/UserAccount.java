@@ -14,27 +14,27 @@ public class UserAccount{
     private Timestamp updatedAt;
 
 }
-public getid()
+public Float getid()
 {
     return id;
 }
-public setid(Long id)
+public void setid(Long id)
 {
     this.id=id;
 }
-public getemail(){
+public  String getemail(){
     return email;
 }
-public setemail(String email){
+public void setemail(String email){
     this.email=email;
 }
-public getfullName(){
+public  string getfullName(){
     return fullName;
 }
-public setfullName(string fullName){
+public void setfullName(string fullName){
     this.fullName=fullName;
 }
-public getactive(){
+public Boolean getactive(){
     return active;
 }
 public setactive(Boolean active){

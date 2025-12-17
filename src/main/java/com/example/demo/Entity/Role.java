@@ -7,7 +7,6 @@ public class Role{
     private Long id;
     @Column (unique=true)
     private string roleName;
-    private string 
-
-    
+    private string description;
+    private Boolean active;   
 }
