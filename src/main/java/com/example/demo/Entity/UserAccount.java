@@ -1,8 +1,7 @@
 import.jakarta.persistence.Entity;
 import.jakarta.persistence.Id;
 import.jakarta.persistence.Column;
-
-
+import.jakarta.persistence.PrePersist;
 @Entity
 public class UserAccount{
     @Id
@@ -13,6 +12,7 @@ public class UserAccount{
     private Boolean active;
     @PrePersist
     private Timestamp createdAt;
+    @PrePersist
     private Timestamp updatedAt;
 
 

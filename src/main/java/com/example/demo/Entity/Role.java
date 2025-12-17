@@ -8,5 +8,22 @@ public class Role{
     @Column (unique=true)
     private string roleName;
     private string description;
-    private Boolean active;   
+    private Boolean active;
+    public Long getid()
+{
+    return id;
+}
+public void setid(Long id)
+{
+    this.id=id;
+} 
+public String getroleName()
+{
+    return id;
+}
+public void setid(Long id)
+{
+    this.id=id;
+}
+
 }
