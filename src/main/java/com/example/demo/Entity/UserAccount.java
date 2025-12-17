@@ -14,7 +14,7 @@ public class UserAccount{
     private Timestamp updatedAt;
 
 }
-public Float getid()
+public Long getid()
 {
     return id;
 }
@@ -37,19 +37,19 @@ public void setfullName(string fullName){
 public Boolean getactive(){
     return active;
 }
-public setactive(Boolean active){
+public  void setactive(Boolean active){
     this.active=active;
 }
-public getcreatedAt(){
+public Timestamp getcreatedAt(){
     return createdAt;
 }
-public setcreatedAt(Timestamp createdAt){
+public  void setcreatedAt(Timestamp createdAt){
     this.createdAt=createdAt;
 }
-public getupdatedAt(){
+public Timestamp getupdatedAt(){
     return updatedAt ;
 }
-public setupdatedAt(Timestamp updatedAt){
+public void setupdatedAt(Timestamp updatedAt){
     this.updatedAt=updatedAt;
 }
 
