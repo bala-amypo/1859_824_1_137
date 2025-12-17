@@ -23,4 +23,12 @@ public setid(Long id)
 public getemail(){
     return email;
 }
-public
+public setemail(String email){
+    this.email=email;
+}
+public getfullName(){
+    return fullName;
+}
+public setfullName(string fullName){
+    this.fullName
+}
