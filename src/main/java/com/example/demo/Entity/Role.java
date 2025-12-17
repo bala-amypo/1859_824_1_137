@@ -19,11 +19,12 @@ public void setid(Long id)
 } 
 public String getroleName()
 {
-    return id;
+    return roleName;
 }
-public void setid(Long id)
+public void setroleName(string roleName)
 {
-    this.id=id;
+    this.roleName=roleName;
 }
+
 
 }
