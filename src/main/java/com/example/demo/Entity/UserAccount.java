@@ -12,3 +12,11 @@ public class UserAccount{
     private Timestamp updatedAt;
 
 }
+public getid()
+{
+    return id;
+}
+public setid(Long id)
+{
+    this.id=id;
+}
