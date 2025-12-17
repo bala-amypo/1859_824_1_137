@@ -9,6 +9,6 @@ public class UserAccount{
     private String fullname;
     private Boolean active;
     private Timestamp createdAt;
-    private Timestamp updatedAt
+    private Timestamp updatedAt;
 
 }
