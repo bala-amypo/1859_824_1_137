@@ -21,9 +21,9 @@ public String getpermissionKey()
 {
     return PermissionKey;
 }
-public void setpermis(string roleName)
+public void setpermissionKey(string PermissionKey)
 {
-    this.roleName=roleName;
+    this.PermissionKey=PermissionKey;
 }
 public string getdescription()
 {
@@ -40,9 +40,5 @@ public string getactive()
 public void setactive(Boolean active)
 {
     this.active=active;
-}
-
-
-
-    
+}    
 }
