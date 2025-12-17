@@ -2,13 +2,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
 import jakarta.persistence.PrePersist;
+import java.sql.Timestamp;
 @Entity
 public class UserAccount{
     @Id
     private Long id;
-    @Column (unique=ture)
+    @Column (unique=true)
     private String email;
-    private String fullname;
+    private String fullName;
     private Boolean active;
     @PrePersist
     private Timestamp createdAt;
@@ -30,10 +31,10 @@ public  String getemail(){
 public void setemail(String email){
     this.email=email;
 }
-public  string getfullName(){
+public  String getfullName(){
     return fullName;
 }
-public void setfullName(string fullName){
+public void setfullName(String fullName){
     this.fullName=fullName;
 }
 public Boolean getactive(){
