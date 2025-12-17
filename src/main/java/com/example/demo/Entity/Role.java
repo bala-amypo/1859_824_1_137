@@ -25,6 +25,14 @@ public void setroleName(string roleName)
 {
     this.roleName=roleName;
 }
+public string getdescription()
+{
+    return id;
+}
+public void setid(Long id)
+{
+    this.id=id;
+}
 
 
 }
