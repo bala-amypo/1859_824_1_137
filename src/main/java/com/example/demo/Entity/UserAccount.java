@@ -11,9 +11,9 @@ public class UserAccount{
     private String email;
     private String fullName;
     private Boolean active;
-    @PrePersist
+   // @PrePersist
     private Timestamp createdAt;
-    @PrePersist
+  //  @PrePersist
     private Timestamp updatedAt;
 
 
