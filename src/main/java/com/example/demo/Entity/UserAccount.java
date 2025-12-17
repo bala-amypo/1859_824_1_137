@@ -62,7 +62,8 @@ public UserAccount(Long id,String email,String fullName,Boolean active,Timestamp
     this.email=email;
     this.fullName=fullName;
     this.active=active;
-    this.createdAt=createdAt
+    this.createdAt=createdAt;
+    this.updatedAt=updatedAt;
 
 }
 }
