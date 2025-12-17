@@ -29,7 +29,7 @@ public string getdescription()
 {
     return id;
 }
-public void setid(Long id)
+public void setdescription(Long id)
 {
     this.id=id;
 }
