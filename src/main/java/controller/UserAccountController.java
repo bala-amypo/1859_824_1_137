@@ -22,7 +22,7 @@ public class UserAccountControllers {
         return userobj.Createuser(user);
     }
     @PutMapping("/{id}")
-    public UserName Update_user(@PathVariable Long id,@Valid @RequestBody UserAccount user){
+    public UserAccount Update_user(@PathVariable Long id,@Valid @RequestBody UserAccount user){
         return userobj.Update_user(id,user);
     }
     @GetMapping("/{id}")
@@ -30,10 +30,11 @@ public class UserAccountControllers {
         return userobj.getViewByID(id);
     }
     @GetMapping
-    public List<Bin> get()
+    public List<UserAccount> get()
     {
         return userobj.getAllUsers();
     }
-    @PutMapping
+    @PutMapping("/{id}")
+    public UserAccount 
 
 }
