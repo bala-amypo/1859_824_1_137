@@ -21,7 +21,8 @@ public class UserAccountControllers {
     public UserAccount Create_user(@RequestBody UserAccount user) {
         return userobj.Createuser(user);
     }
-    @PutMapping("")
+    @PutMapping("/{id}")
+    public UserName Update_user(@PathVariable Long id,@Valid @RequestBody UserAccount user )
     
 
 }
