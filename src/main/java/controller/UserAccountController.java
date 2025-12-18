@@ -19,8 +19,9 @@ public class UserAccountControllers {
     UserAccount userobj;
     @PostMapping("/api/users")
     public UserAccount Create_user(@RequestBody UserAccount user) {
-        return userobj.(user);
+        return userobj.Createuser(user);
     }
+    @PutMapping("")
     
 
 }
