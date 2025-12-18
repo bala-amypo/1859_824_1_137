@@ -7,7 +7,10 @@ import com.example.demo.repository.UserAccountRepo;
 import com.example.demo.service.UserAccountser;
 
 @Service
-public class UserAccount implements UserAccountser
+public class UserAccountserimp implements UserAccountser{
+    @Autowired
+    public UserAccount create
+
 {
 
 }
