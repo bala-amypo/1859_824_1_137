@@ -1,1 +1,4 @@
-public interface UserAccounts
+public class UserAccount implements UserAccountser
+{
+    
+}
