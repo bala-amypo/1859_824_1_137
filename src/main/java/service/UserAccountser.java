@@ -4,9 +4,9 @@ import com.example.demo.entity.UserAccount;
 
 public interface UserAccountser
 {
-    UserAccount createUser(UserAccount user);
-    UserAccount updateUser(Long id,UserAccount user);
-    UserAccount getUserById(Long id);
-    List<UserAccount>getAllUsers();
-    void deactivateUser(Long id);
+   public UserAccount createUser(UserAccount user);
+   public UserAccount updateUser(Long id,UserAccount user);
+   public UserAccount getUserById(Long id);
+   public List<UserAccount>getAllUsers();
+   public void deactivateUser(Long id);
 }
