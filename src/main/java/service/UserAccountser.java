@@ -4,6 +4,7 @@ import com.example.demo.entity.UserAccount;
 
 public interface UserAccountser
 {
-    Accountuser createUser(User);
+    UserAccount createUserAccount(UserAccount user);
+    List<
 
 }
