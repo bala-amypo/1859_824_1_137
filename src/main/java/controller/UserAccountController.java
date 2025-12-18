@@ -26,6 +26,9 @@ public class UserAccountControllers {
         return userobj.Update_user(id,user);
     }
     @GetMapping("/{id}")
-    public UserName getuser(@PathV)
+    public UserName getuser(@PathVariable Long id){
+        return userobj.getViewByID(id);
+    }
+    
 
 }
