@@ -29,6 +29,11 @@ public class UserAccountControllers {
     public UserName getuser(@PathVariable Long id){
         return userobj.getViewByID(id);
     }
-    
+    @GetMapping
+    public List<Bin> get()
+    {
+        return userobj.getAllUsers();
+    }
+    @PutMapping
 
 }
