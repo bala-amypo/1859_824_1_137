@@ -16,10 +16,10 @@ import com.example.demo.entity.UserName;
 @RestController
 public class UserAccountControllers {
     @Autowired
-    UserAccount stuser;
-    @PostMapping("/studentpost")
-    public studentity studatas(@RequestBody studentity student) {
-        return stuser.saveData(student);
+    UserAccount userobj;
+    @PostMapping("/api/users")
+    public UserAccount Create_user(@RequestBody UserAccount user) {
+        return userobj.saveData(user);
     }
     
 
