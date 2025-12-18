@@ -21,17 +21,24 @@ public class UserAccountserimp implements UserAccountser{
      if(account==null){
         return null;
      }
-     account.setUser(user)
+     account.setUser(user);
+     uar.save(account);
 
 
    }
    public UserAccount getUserById(Long id){
+      uar.findById(id);
 
    }
    public List<UserAccount>getAllUsers()
    {
-       return uar.findAll();
+       uar.findAll();
    }
-   public UserAccount deactivateUser(Long id){}
+   public UserAccount deactivateUser(Long id){
+        UserAccount user=uar.findById(id).orElse(null);
+        if(user==null){
+            uar
+        }
+   }
 
 }
