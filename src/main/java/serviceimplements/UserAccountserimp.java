@@ -17,6 +17,12 @@ public class UserAccountserimp implements UserAccountser{
     }
 
    public UserAccount updateUser(Long id,UserAccount user){
+     UserAccount account=uar.findById(id).orElse(null);
+     if(account==null){
+        return null;
+     }
+     account.setUser(user)
+
 
    }
    public UserAccount getUserById(Long id){
@@ -26,6 +32,6 @@ public class UserAccountserimp implements UserAccountser{
    {
        return uar.findAll();
    }
-   public void deactivateUser(Long id){}
+   public UserAccount deactivateUser(Long id){}
 
 }
