@@ -12,11 +12,20 @@ public class UserAccountserimp implements UserAccountser{
     UserAccountRepository uar;
 
     public UserAccount createUser(UserAccount user)
-    {}
+    {
+        return uar.save(user);
+    }
 
-   public UserAccount updateUser(Long id,UserAccount user){}
-   public UserAccount getUserById(Long id){}
-   public List<UserAccount>getAllUsers(){}
+   public UserAccount updateUser(Long id,UserAccount user){
+
+   }
+   public UserAccount getUserById(Long id){
+
+   }
+   public List<UserAccount>getAllUsers()
+   {
+       return uar.findAll();
+   }
    public void deactivateUser(Long id){}
 
 }
