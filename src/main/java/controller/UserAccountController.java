@@ -22,7 +22,10 @@ public class UserAccountControllers {
         return userobj.Createuser(user);
     }
     @PutMapping("/{id}")
-    public UserName Update_user(@PathVariable Long id,@Valid @RequestBody UserAccount user )
-    
+    public UserName Update_user(@PathVariable Long id,@Valid @RequestBody UserAccount user){
+        return userobj.Update_user(id,user);
+    }
+    @GetMapping("/{id}")
+    public UserName getuser(@PathV)
 
 }
