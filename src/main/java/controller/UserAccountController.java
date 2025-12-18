@@ -10,13 +10,13 @@ import com.example.demo.service.UserAccount;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.example.collectiondb.entity.studentity;
+import com.example.demo.entity.UserName;
 
 
 @RestController
-public class studentController {
+public class UserAccountControllers {
     @Autowired
-    studentservice stuser;
+    UserAccount stuser;
     @PostMapping("/studentpost")
     public studentity studatas(@RequestBody studentity student) {
         return stuser.saveData(student);
