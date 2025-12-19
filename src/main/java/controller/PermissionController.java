@@ -14,34 +14,28 @@ public class PermissionController {
     @Autowired
     private PermissionService service;
 
-    // POST /api/permissions
     @PostMapping
     public Permission create(@RequestBody Permission permission) {
-        return service.createPermission(permission);
+        return service.create(permission);
     }
 
-    // PUT /api/permissions/{id}
     @PutMapping("/{id}")
-    public Permission update(@PathVariable Long id,
-                             @RequestBody Permission permission) {
-        return service.updatePermission(id, permission);
+    public Permission update(@PathVariable Long id, @RequestBody Permission permission) {
+        return service.update(id, permission);
     }
 
-    // GET /api/permissions/{id}
     @GetMapping("/{id}")
     public Permission getById(@PathVariable Long id) {
-        return service.getPermissionById(id);
+        return service.getById(id);
     }
 
-    // GET /api/permissions
     @GetMapping
     public List<Permission> getAll() {
-        return service.getAllPermissions();
+        return service.getAll();
     }
 
-    // PUT /api/permissions/{id}/deactivate
     @PutMapping("/{id}/deactivate")
     public Permission deactivate(@PathVariable Long id) {
-        return service.deactivatePermission(id);
+        return service.deactivate(id);
     }
 }

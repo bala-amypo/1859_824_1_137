@@ -14,39 +14,32 @@ public class PermissionServiceImpl implements PermissionService {
     @Autowired
     private PermissionRepository repository;
 
-    @Override
-    public Permission createPermission(Permission permission) {
+    public Permission create(Permission permission) {
         return repository.save(permission);
     }
 
-    @Override
-    public Permission updatePermission(Long id, Permission permission) {
+    public Permission update(Long id, Permission permission) {
         Permission existing = repository.findById(id).orElse(null);
-        if (existing == null) {
-            return null;
-        }
-        existing.setPermissionName(permission.getPermissionName());
+        if (existing == null) return null;
+
+        existing.setName(permission.getName());
         existing.setDescription(permission.getDescription());
         return repository.save(existing);
     }
 
-    @Override
-    public Permission getPermissionById(Long id) {
+    public Permission getById(Long id) {
         return repository.findById(id).orElse(null);
     }
 
-    @Override
-    public List<Permission> getAllPermissions() {
+    public List<Permission> getAll() {
         return repository.findAll();
     }
 
-    @Override
-    public Permission deactivatePermission(Long id) {
-        Permission permission = repository.findById(id).orElse(null);
-        if (permission == null) {
-            return null;
-        }
-        permission.setActive(false);
-        return repository.save(permission);
+    public Permission deactivate(Long id) {
+        Permission p = repository.findById(id).orElse(null);
+        if (p == null) return null;
+
+        p.setActive(false);
+        return repository.save(p);
     }
 }
