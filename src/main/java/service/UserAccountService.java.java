@@ -3,7 +3,7 @@ package com.example.demo.service;
 import java.util.List;
 import com.example.demo.Entity.UserAccount;
 
-public interface UserAccountser {
+public interface UserAccountService {
 
     UserAccount createUser(UserAccount user);
 
