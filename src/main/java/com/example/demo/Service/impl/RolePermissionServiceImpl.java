@@ -13,7 +13,8 @@ public class RolePermissionServiceImpl implements RolePermissionService {
     @Autowired
     private RolePermissionRepository repository;
 
-    public RolePermission assign(RolePermission rp) {
-        return repository.save(rp);
+    @Override
+    public RolePermission assign(RolePermission rolePermission) {
+        return repository.save(rolePermission);
     }
 }

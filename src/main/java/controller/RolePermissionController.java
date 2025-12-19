@@ -14,7 +14,7 @@ public class RolePermissionController {
     private RolePermissionService service;
 
     @PostMapping
-    public RolePermission assign(@RequestBody RolePermission rp) {
-        return service.assign(rp);
+    public RolePermission assign(@RequestBody RolePermission rolePermission) {
+        return service.assign(rolePermission);
     }
 }

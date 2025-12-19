@@ -1,41 +1,54 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
-@Table(name = "permission", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "permission_name")
-})
-public class Permission {
+@Table(name = "role_permission")
+public class RolePermission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "permission_name", nullable = false, unique = true)
-    private String permissionName;
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    private Role role;
 
-    private String description;
+    @ManyToOne
+    @JoinColumn(name = "permission_id", nullable = false)
+    private Permission permission;
 
-    private Boolean active = true;
+    private Timestamp grantedAt;
 
-    public Permission() {}
-
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
-    public String getPermissionName() { return permissionName; }
-    public void setPermissionName(String permissionName) {
-        this.permissionName = permissionName;
+    @PrePersist
+    public void onGrant() {
+        grantedAt = new Timestamp(System.currentTimeMillis());
     }
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) {
-        this.description = description;
+    public RolePermission() {}
+
+    public Long getId() {
+        return id;
     }
 
-    public Boolean getActive() { return active; }
-    public void setActive(Boolean active) {
-        this.active = active;
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Permission getPermission() {
+        return permission;
+    }
+
+    public void setPermission(Permission permission) {
+        this.permission = permission;
+    }
+
+    public Timestamp getGrantedAt() {
+        return grantedAt;
     }
 }
