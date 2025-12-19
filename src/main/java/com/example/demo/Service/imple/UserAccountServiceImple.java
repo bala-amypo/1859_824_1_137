@@ -1,0 +1,50 @@
+package com.example.demo.service.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.entity.UserAccount;
+import com.example.demo.repository.UserAccountRepository;
+import com.example.demo.service.UserAccountService;
+
+@Service
+public class UserAccountServiceImpl implements UserAccountService {
+
+    @Autowired
+    private UserAccountRepository repository;
+
+    @Override
+    public UserAccount createUser(UserAccount user) {
+        return repository.save(user);
+    }
+
+    @Override
+    public UserAccount updateUser(Long id, UserAccount user) {
+        UserAccount existing = repository.findById(id).orElse(null);
+        if (existing == null) return null;
+
+        existing.setEmail(user.getEmail());
+        existing.setFullName(user.getFullName());
+        return repository.save(existing);
+    }
+
+    @Override
+    public UserAccount getUserById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<UserAccount> getAllUsers() {
+        return repository.findAll();
+    }
+
+    @Override
+    public UserAccount deactivateUser(Long id) {
+        UserAccount user = repository.findById(id).orElse(null);
+        if (user == null) return null;
+
+        user.setActive(false);
+        return repository.save(user);
+    }
+}
