@@ -5,13 +5,13 @@ import com.example.demo.entity.Permission;
 
 public interface PermissionService {
 
-    Permission createPermission(Permission permission);
+    Permission create(Permission permission);
 
-    Permission updatePermission(Long id, Permission permission);
+    Permission update(Long id, Permission permission);
 
-    Permission getPermissionById(Long id);
+    Permission getById(Long id);
 
-    List<Permission> getAllPermissions();
+    List<Permission> getAll();
 
-    Permission deactivatePermission(Long id);
+    Permission deactivate(Long id);
 }

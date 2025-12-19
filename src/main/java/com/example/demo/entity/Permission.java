@@ -41,25 +41,65 @@
 // {
 //     this.active=active;
 // }    
+// package com.example.demo.entity;
+
+// import jakarta.persistence.*;
+
+// @Entity
+// @Table(
+//     name = "permission",
+//     uniqueConstraints = {
+//         @UniqueConstraint(columnNames = "permission_name")
+//     }
+// )
+// public class Permission {
+
+//     @Id
+//     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//     private Long id;
+
+//     @Column(name = "permission_name", nullable = false, unique = true)
+//     private String permissionName;
+
+//     private String description;
+
+//     private Boolean active = true;
+
+//     public Permission() {}
+
+//     // Getters & Setters
+//     public Long getId() { return id; }
+//     public void setId(Long id) { this.id = id; }
+
+//     public String getPermissionName() { return permissionName; }
+//     public void setPermissionName(String permissionName) {
+//         this.permissionName = permissionName;
+//     }
+
+//     public String getDescription() { return description; }
+//     public void setDescription(String description) {
+//         this.description = description;
+//     }
+
+//     public Boolean getActive() { return active; }
+//     public void setActive(Boolean active) { this.active = active; }
+// }
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(
-    name = "permission",
-    uniqueConstraints = {
-        @UniqueConstraint(columnNames = "permission_name")
-    }
-)
+@Table(name = "permission", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "name")
+})
 public class Permission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "permission_name", nullable = false, unique = true)
-    private String permissionName;
+    @Column(nullable = false, unique = true)
+    private String name;
 
     private String description;
 
@@ -67,19 +107,14 @@ public class Permission {
 
     public Permission() {}
 
-    // Getters & Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public String getPermissionName() { return permissionName; }
-    public void setPermissionName(String permissionName) {
-        this.permissionName = permissionName;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
     public String getDescription() { return description; }
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    public void setDescription(String description) { this.description = description; }
 
     public Boolean getActive() { return active; }
     public void setActive(Boolean active) { this.active = active; }
