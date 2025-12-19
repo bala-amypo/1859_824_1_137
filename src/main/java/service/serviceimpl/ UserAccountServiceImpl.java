@@ -73,7 +73,6 @@ public class UserAccountServiceImpl implements UserAccountService {
 
         existing.setEmail(user.getEmail());
         existing.setFullName(user.getFullName());
-
         return repository.save(existing);
     }
 
