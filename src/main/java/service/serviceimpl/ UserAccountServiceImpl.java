@@ -59,45 +59,40 @@ import com.example.demo.service.UserAccountService;
 public class UserAccountServiceImpl implements UserAccountService {
 
     @Autowired
-    private UserAccountRepository uar;
+    private UserAccountRepository repository;
 
     @Override
     public UserAccount createUser(UserAccount user) {
-        user.setActive(true);
-        return uar.save(user);
+        return repository.save(user);
     }
 
     @Override
     public UserAccount updateUser(Long id, UserAccount user) {
-        UserAccount account = uar.findById(id).orElse(null);
-        if (account == null) {
-            return null;
-        }
+        UserAccount existing = repository.findById(id).orElse(null);
+        if (existing == null) return null;
 
-        account.setEmail(user.getEmail());
-        account.setFullName(user.getFullName());
+        existing.setEmail(user.getEmail());
+        existing.setFullName(user.getFullName());
 
-        return uar.save(account);
+        return repository.save(existing);
     }
 
     @Override
     public UserAccount getUserById(Long id) {
-        return uar.findById(id).orElse(null);
+        return repository.findById(id).orElse(null);
     }
 
     @Override
     public List<UserAccount> getAllUsers() {
-        return uar.findAll();
+        return repository.findAll();
     }
 
     @Override
     public UserAccount deactivateUser(Long id) {
-        UserAccount user = uar.findById(id).orElse(null);
-        if (user == null) {
-            return null;
-        }
+        UserAccount user = repository.findById(id).orElse(null);
+        if (user == null) return null;
 
         user.setActive(false);
-        return uar.save(user);
+        return repository.save(user);
     }
 }

@@ -44,7 +44,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.demo.Entity.UserAccount;
+import com.example.demo.entity.UserAccount;
 import com.example.demo.service.UserAccountService;
 
 @RestController
@@ -55,28 +55,28 @@ public class UserAccountController {
     private UserAccountService service;
 
     @PostMapping
-    public UserAccount createUser(@RequestBody UserAccount user) {
+    public UserAccount create(@RequestBody UserAccount user) {
         return service.createUser(user);
     }
 
     @PutMapping("/{id}")
-    public UserAccount updateUser(@PathVariable Long id,
-                                  @RequestBody UserAccount user) {
+    public UserAccount update(@PathVariable Long id,
+                              @RequestBody UserAccount user) {
         return service.updateUser(id, user);
     }
 
     @GetMapping("/{id}")
-    public UserAccount getUserById(@PathVariable Long id) {
+    public UserAccount getById(@PathVariable Long id) {
         return service.getUserById(id);
     }
 
     @GetMapping
-    public List<UserAccount> getAllUsers() {
+    public List<UserAccount> getAll() {
         return service.getAllUsers();
     }
 
     @PutMapping("/{id}/deactivate")
-    public UserAccount deactivateUser(@PathVariable Long id) {
+    public UserAccount deactivate(@PathVariable Long id) {
         return service.deactivateUser(id);
     }
 }

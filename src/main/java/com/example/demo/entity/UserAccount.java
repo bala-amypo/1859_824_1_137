@@ -67,80 +67,44 @@
 
 // }
 // }
-
-package com.example.demo.Entity;
+//------------------------------------------------------
+package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
+@Table(name = "user_account")
 public class UserAccount {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private String fullName;
 
-    private Boolean active;
+    private Boolean active = true;
 
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
-    // Getters & Setters
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
+    @PrePersist
+    public void onCreate() {
+        createdAt = new Timestamp(System.currentTimeMillis());
+        updatedAt = createdAt;
     }
 
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
-    }
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
+    @PreUpdate
+    public void onUpdate() {
+        updatedAt = new Timestamp(System.currentTimeMillis());
     }
 
     public UserAccount() {}
 
-    public UserAccount(Long id, String email, String fullName,
-                       Boolean active, Timestamp createdAt, Timestamp updatedAt) {
-        this.id = id;
-        this.email = email;
-        this.fullName = fullName;
-        this.active = active;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
-}
+    // Getters & Setters
+    public Long getId() { return id; }
+    public void setId(Lon
