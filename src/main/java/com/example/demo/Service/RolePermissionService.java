@@ -1,17 +1,8 @@
 package com.example.demo.service;
 
-import java.util.List;
-import com.example.demo.entity.Permission;
+import com.example.demo.entity.RolePermission;
 
-public interface PermissionService {
+public interface RolePermissionService {
 
-    Permission create(Permission permission);
-
-    Permission update(Long id, Permission permission);
-
-    Permission getById(Long id);
-
-    List<Permission> getAll();
-
-    Permission deactivate(Long id);
+    RolePermission assign(RolePermission rolePermission);
 }

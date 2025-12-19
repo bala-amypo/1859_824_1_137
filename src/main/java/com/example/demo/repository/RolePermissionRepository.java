@@ -1,9 +1,7 @@
 package com.example.demo.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.example.demo.entity.Permission;
+import com.example.demo.entity.RolePermission;
 
-public interface PermissionRepository extends JpaRepository<Permission, Long> {
-
-    boolean existsByPermissionName(String permissionName);
+public interface RolePermissionRepository extends JpaRepository<RolePermission, Long> {
 }

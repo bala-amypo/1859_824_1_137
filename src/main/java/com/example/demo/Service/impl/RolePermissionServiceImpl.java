@@ -1,50 +1,19 @@
 package com.example.demo.service.impl;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entity.Permission;
-import com.example.demo.repository.PermissionRepository;
-import com.example.demo.service.PermissionService;
+import com.example.demo.entity.RolePermission;
+import com.example.demo.repository.RolePermissionRepository;
+import com.example.demo.service.RolePermissionService;
 
 @Service
-public class PermissionServiceImpl implements PermissionService {
+public class RolePermissionServiceImpl implements RolePermissionService {
 
     @Autowired
-    private PermissionRepository repository;
+    private RolePermissionRepository repository;
 
-    @Override
-    public Permission create(Permission permission) {
-        return repository.save(permission);
-    }
-
-    @Override
-    public Permission update(Long id, Permission permission) {
-        Permission existing = repository.findById(id).orElse(null);
-        if (existing == null) return null;
-
-        existing.setPermissionName(permission.getPermissionName());
-        existing.setDescription(permission.getDescription());
-        return repository.save(existing);
-    }
-
-    @Override
-    public Permission getById(Long id) {
-        return repository.findById(id).orElse(null);
-    }
-
-    @Override
-    public List<Permission> getAll() {
-        return repository.findAll();
-    }
-
-    @Override
-    public Permission deactivate(Long id) {
-        Permission p = repository.findById(id).orElse(null);
-        if (p == null) return null;
-
-        p.setActive(false);
-        return repository.save(p);
+    public RolePermission assign(RolePermission rp) {
+        return repository.save(rp);
     }
 }
