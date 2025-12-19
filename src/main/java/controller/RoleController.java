@@ -40,4 +40,3 @@ public class RoleController {
         return service.deactivateRole(id);
     }
 }
-`
