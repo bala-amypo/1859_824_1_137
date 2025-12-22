@@ -28,7 +28,7 @@ public class UserRole {
 
     public UserRole() {}
 
-    // Getters & Setters
+    
     public Long getId() {
         return id;
     }

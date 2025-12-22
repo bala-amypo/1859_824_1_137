@@ -39,7 +39,7 @@ public class UserAccount {
     public UserAccount() {
     }
 
-    // Getters and Setters
+    
     public Long getId() {
         return id;
     }
