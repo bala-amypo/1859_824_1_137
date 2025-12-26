@@ -1,59 +1,75 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.*;
-import com.example.demo.exception.*;
-import com.example.demo.repository.*;
+import com.example.demo.entity.Role;
+import com.example.demo.entity.UserAccount;
+import com.example.demo.entity.UserRole;
+import com.example.demo.exception.BadRequestException;
+import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.repository.RoleRepository;
+import com.example.demo.repository.UserAccountRepository;
+import com.example.demo.repository.UserRoleRepository;
 import com.example.demo.service.UserRoleService;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 public class UserRoleServiceImpl implements UserRoleService {
 
-    private final UserRoleRepository userRoleRepo;
-    private final UserAccountRepository userRepo;
-    private final RoleRepository roleRepo;
+    private final UserRoleRepository userRoleRepository;
+    private final UserAccountRepository userAccountRepository;
+    private final RoleRepository roleRepository;
 
-    public UserRoleServiceImpl(UserRoleRepository userRoleRepo,
-                               UserAccountRepository userRepo,
-                               RoleRepository roleRepo) {
-        this.userRoleRepo = userRoleRepo;
-        this.userRepo = userRepo;
-        this.roleRepo = roleRepo;
+    public UserRoleServiceImpl(UserRoleRepository userRoleRepository,
+                               UserAccountRepository userAccountRepository,
+                               RoleRepository roleRepository) {
+        this.userRoleRepository = userRoleRepository;
+        this.userAccountRepository = userAccountRepository;
+        this.roleRepository = roleRepository;
     }
 
     @Override
     public UserRole assignRole(UserRole mapping) {
-        UserAccount user = userRepo.findById(mapping.getUser().getId())
-                .orElseThrow(() -> new BadRequestException("User not found or inactive"));
 
-        Role role = roleRepo.findById(mapping.getRole().getId())
-                .orElseThrow(() -> new BadRequestException("Role not found or inactive"));
+        Long userId = mapping.getUser().getId();
+        Long roleId = mapping.getRole().getId();
 
-        if (!user.getActive() || !role.getActive()) {
-            throw new BadRequestException("User or Role inactive");
+        UserAccount user = userAccountRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+        Role role = roleRepository.findById(roleId)
+                .orElseThrow(() -> new ResourceNotFoundException("Role not found"));
+
+        if (!user.isActive()) {
+            throw new BadRequestException("Inactive user");
+        }
+
+        if (!role.isActive()) {
+            throw new BadRequestException("Inactive role");
         }
 
         mapping.setUser(user);
         mapping.setRole(role);
-        return userRoleRepo.save(mapping);
+
+        return userRoleRepository.save(mapping);
     }
 
     @Override
     public List<UserRole> getRolesForUser(Long userId) {
-        return userRoleRepo.findByUser_Id(userId);
+        return userRoleRepository.findByUser_Id(userId);
     }
 
     @Override
     public UserRole getMappingById(Long id) {
-        return userRoleRepo.findById(id)
+        return userRoleRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Mapping not found"));
     }
 
     @Override
-    public void removeRole(Long mappingId) {
-        UserRole ur = getMappingById(mappingId);
-        userRoleRepo.delete(ur);
+    public void removeRole(Long id) {
+
+        if (!userRoleRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Mapping not found");
+        }
+
+        userRoleRepository.deleteById(id);
     }
 }
