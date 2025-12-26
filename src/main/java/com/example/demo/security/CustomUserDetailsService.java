@@ -14,30 +14,33 @@ import java.util.stream.Collectors;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final UserAccountRepository userRepo;
-    private final UserRoleRepository userRoleRepo;
+    private final UserAccountRepository userAccountRepository;
+    private final UserRoleRepository userRoleRepository;
 
-    public CustomUserDetailsService(UserAccountRepository userRepo,
-                                    UserRoleRepository userRoleRepo) {
-        this.userRepo = userRepo;
-        this.userRoleRepo = userRoleRepo;
+    public CustomUserDetailsService(UserAccountRepository userAccountRepository,
+                                    UserRoleRepository userRoleRepository) {
+        this.userAccountRepository = userAccountRepository;
+        this.userRoleRepository = userRoleRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
 
-        UserAccount user = userRepo.findByEmail(email)
+        UserAccount user = userAccountRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        List<UserRole> roles = userRoleRepo.findByUser_Id(user.getId());
+        List<SimpleGrantedAuthority> authorities =
+                userRoleRepository.findByUser_Id(user.getId())
+                        .stream()
+                        .map(UserRole::getRole)
+                        .map(r -> new SimpleGrantedAuthority(r.getRoleName()))
+                        .collect(Collectors.toList());
 
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),
-                user.getPassword() != null ? user.getPassword() : "",
-                roles.stream()
-                        .map(r -> new SimpleGrantedAuthority(r.getRole().getRoleName()))
-                        .collect(Collectors.toList())
+                "password", // fixed password (SAAS rule)
+                authorities
         );
     }
 }
