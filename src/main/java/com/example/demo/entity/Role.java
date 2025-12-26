@@ -4,10 +4,8 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(
-    name = "role",
-    uniqueConstraints = {
-        @UniqueConstraint(columnNames = "role_name")
-    }
+    name = "roles",
+    uniqueConstraints = @UniqueConstraint(columnNames = "roleName")
 )
 public class Role {
 
@@ -15,23 +13,20 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "role_name", nullable = false, unique = true)
     private String roleName;
 
     private String description;
 
     private Boolean active = true;
 
-    public Role() {
-    }
+    public Role() {}
 
     public Role(String roleName, String description, Boolean active) {
         this.roleName = roleName;
         this.description = description;
-        this.active = active;
+        this.active = active != null ? active : true;
     }
 
-    // Getters & Setters
     public Long getId() {
         return id;
     }

@@ -1,35 +1,42 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import java.sql.Timestamp;
+import java.time.Instant;
 
 @Entity
-@Table(name = "role_permission")
+@Table(name = "role_permissions")
 public class RolePermission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
+    @ManyToOne(optional = false)
     private Role role;
 
-    @ManyToOne
-    @JoinColumn(name = "permission_id", nullable = false)
+    @ManyToOne(optional = false)
     private Permission permission;
 
-    private Timestamp grantedAt;
-
-    @PrePersist
-    public void onGrant() {
-        grantedAt = new Timestamp(System.currentTimeMillis());
-    }
+    private Instant grantedAt;
 
     public RolePermission() {}
 
+    public RolePermission(Role role, Permission permission) {
+        this.role = role;
+        this.permission = permission;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.grantedAt = Instant.now();
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Role getRole() {
@@ -48,7 +55,11 @@ public class RolePermission {
         this.permission = permission;
     }
 
-    public Timestamp getGrantedAt() {
+    public Instant getGrantedAt() {
         return grantedAt;
+    }
+
+    public void setGrantedAt(Instant grantedAt) {
+        this.grantedAt = grantedAt;
     }
 }
