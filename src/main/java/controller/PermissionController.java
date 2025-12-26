@@ -1,41 +1,43 @@
 package com.example.demo.controller;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import com.example.demo.entity.Permission;
 import com.example.demo.service.PermissionService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/permissions")
 public class PermissionController {
 
-    @Autowired
-    private PermissionService service;
+    private final PermissionService permissionService;
+
+    public PermissionController(PermissionService permissionService) {
+        this.permissionService = permissionService;
+    }
 
     @PostMapping
-    public Permission create(@RequestBody Permission permission) {
-        return service.create(permission);
+    public Permission createPermission(@RequestBody Permission permission) {
+        return permissionService.createPermission(permission);
     }
 
     @PutMapping("/{id}")
-    public Permission update(@PathVariable Long id, @RequestBody Permission permission) {
-        return service.update(id, permission);
+    public Permission updatePermission(@PathVariable Long id, @RequestBody Permission permission) {
+        return permissionService.updatePermission(id, permission);
     }
 
     @GetMapping("/{id}")
-    public Permission getById(@PathVariable Long id) {
-        return service.getById(id);
+    public Permission getPermissionById(@PathVariable Long id) {
+        return permissionService.getPermissionById(id);
     }
 
     @GetMapping
-    public List<Permission> getAll() {
-        return service.getAll();
+    public List<Permission> getAllPermissions() {
+        return permissionService.getAllPermissions();
     }
 
     @PutMapping("/{id}/deactivate")
-    public Permission deactivate(@PathVariable Long id) {
-        return service.deactivate(id);
+    public void deactivatePermission(@PathVariable Long id) {
+        permissionService.deactivatePermission(id);
     }
 }

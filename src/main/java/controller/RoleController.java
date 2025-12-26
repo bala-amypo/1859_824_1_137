@@ -1,42 +1,43 @@
 package com.example.demo.controller;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import com.example.demo.entity.Role;
 import com.example.demo.service.RoleService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/roles")
+@RequestMapping("/api/roles")
 public class RoleController {
 
-    @Autowired
-    private RoleService service;
+    private final RoleService roleService;
+
+    public RoleController(RoleService roleService) {
+        this.roleService = roleService;
+    }
 
     @PostMapping
-    public Role create(@RequestBody Role role) {
-        return service.createRole(role);
-    }
-
-    @GetMapping("/{id}")
-    public Role getById(@PathVariable Long id) {
-        return service.getRoleById(id);
-    }
-
-    @GetMapping
-    public List<Role> getAll() {
-        return service.getAllRoles();
+    public Role createRole(@RequestBody Role role) {
+        return roleService.createRole(role);
     }
 
     @PutMapping("/{id}")
-    public Role update(@PathVariable Long id,
-                       @RequestBody Role role) {
-        return service.updateRole(id, role);
+    public Role updateRole(@PathVariable Long id, @RequestBody Role role) {
+        return roleService.updateRole(id, role);
+    }
+
+    @GetMapping("/{id}")
+    public Role getRoleById(@PathVariable Long id) {
+        return roleService.getRoleById(id);
+    }
+
+    @GetMapping
+    public List<Role> getAllRoles() {
+        return roleService.getAllRoles();
     }
 
     @PutMapping("/{id}/deactivate")
-    public Role deactivate(@PathVariable Long id) {
-        return service.deactivateRole(id);
+    public void deactivateRole(@PathVariable Long id) {
+        roleService.deactivateRole(id);
     }
 }

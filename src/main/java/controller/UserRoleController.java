@@ -1,36 +1,38 @@
 package com.example.demo.controller;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import com.example.demo.entity.UserRole;
 import com.example.demo.service.UserRoleService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/user-roles")
 public class UserRoleController {
 
-    @Autowired
-    private UserRoleService service;
+    private final UserRoleService userRoleService;
+
+    public UserRoleController(UserRoleService userRoleService) {
+        this.userRoleService = userRoleService;
+    }
 
     @PostMapping
-    public UserRole assign(@RequestBody UserRole userRole) {
-        return service.assignRole(userRole);
+    public UserRole assignRole(@RequestBody UserRole mapping) {
+        return userRoleService.assignRole(mapping);
+    }
+
+    @GetMapping("/user/{userId}")
+    public List<UserRole> getRolesForUser(@PathVariable Long userId) {
+        return userRoleService.getRolesForUser(userId);
     }
 
     @GetMapping("/{id}")
-    public UserRole getById(@PathVariable Long id) {
-        return service.getById(id);
-    }
-
-    @GetMapping
-    public List<UserRole> getAll() {
-        return service.getAll();
+    public UserRole getMappingById(@PathVariable Long id) {
+        return userRoleService.getMappingById(id);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        service.remove(id);
+    public void removeRole(@PathVariable Long id) {
+        userRoleService.removeRole(id);
     }
 }
