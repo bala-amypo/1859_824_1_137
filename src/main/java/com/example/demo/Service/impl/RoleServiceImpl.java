@@ -1,53 +1,35 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.Role;
-import com.example.demo.exception.*;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.service.RoleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RoleServiceImpl implements RoleService {
 
-    private final RoleRepository roleRepo;
+    @Autowired
+    private RoleRepository roleRepo;
 
-    public RoleServiceImpl(RoleRepository roleRepo) {
-        this.roleRepo = roleRepo;
+    @Override
+    public Role getRoleById(Long roleId) {
+        // Fetch Role as Optional
+        Optional<Role> roleOptional = roleRepo.findById(roleId);
+
+        // Handle the optional properly
+        return roleOptional.orElseThrow(() -> new RuntimeException("Role not found"));
     }
 
     @Override
-    public Role createRole(Role role) {
-        roleRepo.findByRoleName(role.getRoleName())
-                .ifPresent(r -> { throw new BadRequestException("Role already exists"); });
-        return roleRepo.save(role);
-    }
+    public void deleteRole(Long roleId) {
+        Optional<Role> roleOptional = roleRepo.findById(roleId);
 
-    @Override
-    public Role updateRole(Long id, Role updated) {
-        Role role = getRoleById(id);
-        role.setRoleName(updated.getRoleName());
-        role.setDescription(updated.getDescription());
-        role.setActive(updated.getActive());
-        return roleRepo.save(role);
-    }
-
-    @Override
-    public Role getRoleById(Long id) {
-        return roleRepo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Role not found"));
-    }
-
-    @Override
-    public List<Role> getAllRoles() {
-        return roleRepo.findAll();
-    }
-
-    @Override
-    public void deactivateRole(Long id) {
-        Role role = getRoleById(id);
-        role.setActive(false);
-        roleRepo.save(role);
+        roleOptional.ifPresentOrElse(
+                role -> roleRepo.delete(role),
+                () -> { throw new RuntimeException("Role not found"); }
+        );
     }
 }
