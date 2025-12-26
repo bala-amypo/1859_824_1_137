@@ -1,45 +1,53 @@
-
-
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import java.sql.Timestamp;
+import java.time.Instant;
 
 @Entity
-@Table(name = "user_account")
+@Table(
+    name = "user_accounts",
+    uniqueConstraints = @UniqueConstraint(columnNames = "email")
+)
 public class UserAccount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
     private String fullName;
+
+    private String password;
 
     private Boolean active = true;
 
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
+    private Instant createdAt;
+    private Instant updatedAt;
+
+    public UserAccount() {}
+
+    public UserAccount(String email, String fullName, Boolean active) {
+        this.email = email;
+        this.fullName = fullName;
+        this.active = active != null ? active : true;
+    }
 
     @PrePersist
-    public void onCreate() {
-        Timestamp now = new Timestamp(System.currentTimeMillis());
-        this.createdAt = now;
-        this.updatedAt = now;
+    protected void onCreate() {
+        this.createdAt = Instant.now();
+        this.updatedAt = Instant.now();
+        if (this.active == null) {
+            this.active = true;
+        }
     }
 
     @PreUpdate
-    public void onUpdate() {
-        this.updatedAt = new Timestamp(System.currentTimeMillis());
+    protected void onUpdate() {
+        this.updatedAt = Instant.now();
     }
 
-    public UserAccount() {
-    }
-
-    
     public Long getId() {
         return id;
     }
@@ -64,6 +72,14 @@ public class UserAccount {
         this.fullName = fullName;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public Boolean getActive() {
         return active;
     }
@@ -72,11 +88,19 @@ public class UserAccount {
         this.active = active;
     }
 
-    public Timestamp getCreatedAt() {
+    public Instant getCreatedAt() {
         return createdAt;
     }
 
-    public Timestamp getUpdatedAt() {
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Instant getUpdatedAt() {
         return updatedAt;
+    }
+
+    public void setUpdatedAt(Instant updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
