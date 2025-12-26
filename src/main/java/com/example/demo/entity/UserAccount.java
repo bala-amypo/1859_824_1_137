@@ -1,20 +1,16 @@
-package com.example.demo.entity;
+ackage com.example.demo.entity;
 
-import jakarta.persistence.*;
 import java.time.Instant;
+import jakarta.persistence.*;
 
 @Entity
-@Table(
-    name = "user_accounts",
-    uniqueConstraints = @UniqueConstraint(columnNames = "email")
-)
 public class UserAccount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String email;
 
     private String fullName;
@@ -23,30 +19,13 @@ public class UserAccount {
 
     private Boolean active = true;
 
+    @Column(nullable = false, updatable = false)
     private Instant createdAt;
+
+    @Column(nullable = false)
     private Instant updatedAt;
 
     public UserAccount() {}
-
-    public UserAccount(String email, String fullName, Boolean active) {
-        this.email = email;
-        this.fullName = fullName;
-        this.active = active != null ? active : true;
-    }
-
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = Instant.now();
-        this.updatedAt = Instant.now();
-        if (this.active == null) {
-            this.active = true;
-        }
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = Instant.now();
-    }
 
     public Long getId() {
         return id;
@@ -102,5 +81,28 @@ public class UserAccount {
 
     public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    
+    public boolean isActive() {
+        return Boolean.TRUE.equals(this.active);
+    }
+
+   
+    public void persist() {
+        // no-op
+    }
+
+    @PrePersist
+    public void prePersist() {
+        Instant now = Instant.now();
+        this.createdAt = now;
+        this.updatedAt = now;
+        this.active = true;
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.updatedAt = Instant.now();
     }
 }

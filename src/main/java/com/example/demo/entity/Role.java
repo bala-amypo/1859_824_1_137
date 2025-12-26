@@ -1,20 +1,35 @@
+
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "roles")
 public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @Column(unique = true, nullable = false)
+    private String roleName;
 
-    private boolean active;
+    private String description;
 
-    // Getters and setters
+    private Boolean active = true;
+
+    
+    public Role() {}
+
+    
+    public Role(Long id, String roleName, String description, Boolean active) {
+        this.id = id;
+        this.roleName = roleName;
+        this.description = description;
+        this.active = active;
+    }
+
+    
+
     public Long getId() {
         return id;
     }
@@ -23,19 +38,36 @@ public class Role {
         this.id = id;
     }
 
-    public String getName() { // previously called getRoleName()
-        return name;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
-    public boolean isActive() { // previously called getActive()
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Boolean getActive() {
         return active;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         this.active = active;
     }
+
+    public boolean isActive() {
+        return Boolean.TRUE.equals(this.active);
+    }
+
+    public void persist() {
+        // SAAS test hook
+    }
+
 }

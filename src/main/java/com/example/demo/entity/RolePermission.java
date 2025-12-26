@@ -1,35 +1,51 @@
+
 package com.example.demo.entity;
 
-import jakarta.persistence.*;
-import java.time.Instant;
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 
 @Entity
-@Table(name = "role_permissions")
 public class RolePermission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
+    @JoinColumn(name = "permission_id", nullable = false)
     private Permission permission;
 
-    private Instant grantedAt;
+    private LocalDateTime grantedAt;
 
-    public RolePermission() {}
+   
+    public RolePermission() {
+    }
 
-    public RolePermission(Role role, Permission permission) {
+    
+    public RolePermission(Long id, Role role, Permission permission, LocalDateTime grantedAt) {
+        this.id = id;
         this.role = role;
         this.permission = permission;
+        this.grantedAt = grantedAt;
     }
 
     @PrePersist
-    protected void onCreate() {
-        this.grantedAt = Instant.now();
+    public void onCreate() {
+        this.grantedAt = LocalDateTime.now();
     }
+
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -55,11 +71,20 @@ public class RolePermission {
         this.permission = permission;
     }
 
-    public Instant getGrantedAt() {
+    public LocalDateTime getGrantedAt() {
         return grantedAt;
     }
 
-    public void setGrantedAt(Instant grantedAt) {
+    public void setGrantedAt(LocalDateTime grantedAt) {
         this.grantedAt = grantedAt;
     }
+
+    public void prePersist() {
+        this.grantedAt = LocalDateTime.now();
+    }
+
+    public void preUpdate() {
+        // this.updatedAt = LocalDateTime.now();
+    }
+
 }
