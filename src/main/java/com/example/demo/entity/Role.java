@@ -3,30 +3,26 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(
-    name = "roles",
-    uniqueConstraints = @UniqueConstraint(columnNames = "roleName")
-)
+@Table(name = "roles")
 public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String roleName;
+    private String name;
 
-    private String description;
+    private boolean active;
 
-    private Boolean active = true;
-
+    // Constructor
     public Role() {}
 
-    public Role(String roleName, String description, Boolean active) {
-        this.roleName = roleName;
-        this.description = description;
-        this.active = active != null ? active : true;
+    public Role(String name, boolean active) {
+        this.name = name;
+        this.active = active;
     }
 
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -35,27 +31,19 @@ public class Role {
         this.id = id;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getName() {      // <-- Needed by RoleServiceImpl
+        return name;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Boolean getActive() {
+    public boolean isActive() {    // <-- Needed by RoleServiceImpl
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
 }
