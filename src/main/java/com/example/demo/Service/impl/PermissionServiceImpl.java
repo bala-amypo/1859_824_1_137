@@ -1,45 +1,53 @@
 package com.example.demo.service.impl;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.example.demo.entity.Permission;
+import com.example.demo.exception.*;
 import com.example.demo.repository.PermissionRepository;
 import com.example.demo.service.PermissionService;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PermissionServiceImpl implements PermissionService {
 
-    @Autowired
-    private PermissionRepository repository;
+    private final PermissionRepository permissionRepo;
 
-    public Permission create(Permission permission) {
-        return repository.save(permission);
+    public PermissionServiceImpl(PermissionRepository permissionRepo) {
+        this.permissionRepo = permissionRepo;
     }
 
-    public Permission update(Long id, Permission permission) {
-        Permission existing = repository.findById(id).orElse(null);
-        if (existing == null) return null;
-
-        existing.setName(permission.getName());
-        existing.setDescription(permission.getDescription());
-        return repository.save(existing);
+    @Override
+    public Permission createPermission(Permission permission) {
+        permissionRepo.findByPermissionKey(permission.getPermissionKey())
+                .ifPresent(p -> { throw new BadRequestException("Permission already exists"); });
+        return permissionRepo.save(permission);
     }
 
-    public Permission getById(Long id) {
-        return repository.findById(id).orElse(null);
+    @Override
+    public Permission updatePermission(Long id, Permission updated) {
+        Permission permission = getPermissionById(id);
+        permission.setPermissionKey(updated.getPermissionKey());
+        permission.setDescription(updated.getDescription());
+        permission.setActive(updated.getActive());
+        return permissionRepo.save(permission);
     }
 
-    public List<Permission> getAll() {
-        return repository.findAll();
+    @Override
+    public Permission getPermissionById(Long id) {
+        return permissionRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Permission not found"));
     }
 
-    public Permission deactivate(Long id) {
-        Permission p = repository.findById(id).orElse(null);
-        if (p == null) return null;
+    @Override
+    public List<Permission> getAllPermissions() {
+        return permissionRepo.findAll();
+    }
 
-        p.setActive(false);
-        return repository.save(p);
+    @Override
+    public void deactivatePermission(Long id) {
+        Permission permission = getPermissionById(id);
+        permission.setActive(false);
+        permissionRepo.save(permission);
     }
 }
