@@ -14,14 +14,6 @@ public class Role {
 
     private boolean active;
 
-    // Constructors
-    public Role() {}
-
-    public Role(String name, boolean active) {
-        this.name = name;
-        this.active = active;
-    }
-
     // Getters and setters
     public Long getId() {
         return id;
@@ -31,7 +23,7 @@ public class Role {
         this.id = id;
     }
 
-    public String getName() {     // used instead of getRoleName()
+    public String getName() { // previously called getRoleName()
         return name;
     }
 
@@ -39,7 +31,7 @@ public class Role {
         this.name = name;
     }
 
-    public boolean isActive() {   // used instead of getActive()
+    public boolean isActive() { // previously called getActive()
         return active;
     }
 
