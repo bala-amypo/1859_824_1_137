@@ -38,9 +38,9 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Digital Certificate Generator API")
+                        .title("SaaS User Role Permission Manager API")
                         .version("1.0")
-                        .description("Digital Certificate Generator API with JWT Authentication"))
+                        .description("SaaS User Role Permission Manager API with JWT Authentication"))
                 .servers(List.of(
                         // Updated to match your current browser URL in the screenshot
                         new Server().url("https://9063.32procr.amypo.ai/") 
